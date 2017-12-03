@@ -7,6 +7,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.stream.Stream;
 
+import static java.lang.System.*;
+
 public class Updater {
 
     private final Map<String, String> fileNames = new HashMap<>();
@@ -34,8 +36,11 @@ public class Updater {
         Stream.of(updates.listFiles()).forEach(file -> {
             try {
                 Files.move(Paths.get(file.getPath()), Paths.get(plugins.getPath(), file.getName()), StandardCopyOption.REPLACE_EXISTING);
-            } catch (Exception ex) {}
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         });
+        exit(1);
     }
 
     public static void main(String[] args) {
