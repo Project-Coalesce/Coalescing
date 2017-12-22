@@ -5,10 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.coalescing</groupId>
-    <artifactId>coalescing</artifactId>
-    <version>1.0</version>
+    <artifactId>Coalescing</artifactId>
+    <version>1.0.0</version>
 
     <build>
+        <finalName>Coalescing</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -19,6 +20,24 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.coalesce.coalescing.Updater</mainClass>
+                        </manifest>
+                    </archive>
+                    <outputDirectory>../CoalesceCoreCommon/src/main/resources</outputDirectory>
+                </configuration>
+            </plugin>
+
+
+
         </plugins>
     </build>
 
