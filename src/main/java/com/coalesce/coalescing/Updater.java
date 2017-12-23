@@ -35,18 +35,13 @@ public class Updater extends Thread {
                     fileNames.put(plugins[0]/*old*/, plugins[1]/*new*/);
                 }
         );
-        try {
-            update();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
     }
-
-    private void update() throws Exception {
+    
+    @Override
+    public void run() {
         File plugins = new File(pluginFolder);
         Stream.of(plugins.listFiles()).filter(file -> fileNames.keySet().contains(file.getName())).forEach(File::delete);
-        
+    
         File updates = new File(updatesFolder);
         Stream.of(updates.listFiles()).forEach(file -> {
             try {
@@ -56,10 +51,11 @@ public class Updater extends Thread {
                 e.printStackTrace();
             }
         });
-        
+    
+        System.exit(0);
     }
 
     public static void main(String[] args) {
-        new Updater(args[0], args[1], Arrays.copyOfRange(args, 2, args.length));
+        new Updater(args[0], args[1], Arrays.copyOfRange(args, 2, args.length)).start();
     }
 }
