@@ -32,13 +32,21 @@ public class Updater extends Thread {
         Stream.of(files).forEach(
                 name -> {
                     String[] plugins = name.split(":");
-                    fileNames.put(plugins[0]/*old*/, plugins[1].concat(" ")/*new*/);
+                    fileNames.put(plugins[0]/*old*/, plugins[1]/*new*/);
                 }
         );
     }
     
     @Override
     public void run() {
+    
+        try {
+            sleep(3000);
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    
         File plugins = new File(pluginFolder);
         Stream.of(plugins.listFiles()).filter(file -> fileNames.keySet().contains(file.getName())).forEach(File::delete);
     
