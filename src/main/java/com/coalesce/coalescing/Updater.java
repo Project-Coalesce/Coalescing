@@ -32,7 +32,7 @@ public class Updater extends Thread {
         Stream.of(files).forEach(
                 name -> {
                     String[] plugins = name.split(":");
-                    fileNames.put(plugins[0]/*old*/, plugins[1]/*new*/);
+                    fileNames.put(plugins[0]/*old*/, plugins[1].concat(" ")/*new*/);
                 }
         );
     }
